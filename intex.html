@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maharaja | Portfolio</title>
+<style>
+  .skills-scroll-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0;
+  }
+  .skills {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 24px 0 24px 0;
+    min-width: 0;
+    width: 100%;
+    min-height: 160px;
+    align-items: center;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+  }
+  .skills::-webkit-scrollbar {
+  height: 32px;
+  width: 320px;
+  background: transparent;
+}
+.skills::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 16px;
+  border: none;
+  box-shadow: none;
+}
+.skills::-webkit-scrollbar-track {
+  background: transparent;
+  width: 320px;
+}
+.skills {
+  scrollbar-width: none; /* For Firefox: hide scrollbar */
+}
+
+    .profile-pic-glow {
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    border: 10px solid #00eaff;
+    box-shadow: 0 0 96px #00eaff, 0 0 192px #1e90ff;
+    position: relative;
+    background: #0a0f1c;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+    z-index: 1;
+    transition: box-shadow 0.3s, width 0.3s, height 0.3s, border-width 0.3s;
+  }
+  .profile-pic-glow::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #00eaff55 0%, #1e90ff22 60%, transparent 100%);
+    z-index: -1;
+    filter: blur(16px);
+  }
+  .profile-pic-glow:hover,
+  .profile-pic-glow.profile-pic-active {
+    width: 460px;
+    height: 460px;
+    box-shadow: 0 0 180px #00eaff, 0 0 320px #1e90ff;
+    border-width: 16px;
+    border-color: #00eaff;
+  }
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0a0f1c, #0b2a45);
+        color: #ffffff;
+        line-height: 1.6;
+    }
+
+    nav {
+        background: rgba(0,0,0,0.7);
+        padding: 15px 20px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        z-index: 1000;
+        margin-bottom: 48px;
+    }
+
+    nav a {
+        color: #4fc3f7;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s, box-shadow 0.3s, text-shadow 0.3s, background 0.3s, padding 0.3s, transform 0.18s cubic-bezier(.4,2,.6,1), background-color 0.18s;
+        font-size: 1.25rem;
+        padding: 12px 28px;
+        border-radius: 24px;
+        margin: 0 6px;
+        background: rgba(0,0,0,0.25);
+        box-shadow: 0 0 0 #00eaff00;
+        display: inline-block;
+        will-change: transform, background-color;
+    }
+
+    nav a.nav-btn-animate {
+        background: #00eaff;
+        color: #0a0f1c;
+        transform: scale(1.13);
+        box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff;
+        text-shadow: 0 0 12px #1e90ff;
+        transition: transform 0.18s cubic-bezier(.4,2,.6,1), background-color 0.18s, color 0.18s, box-shadow 0.18s, text-shadow 0.18s;
+    }
+
+    nav a:active {
+        background: #00eaff;
+        color: #0a0f1c;
+        transform: scale(1.13);
+        box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff;
+        text-shadow: 0 0 12px #1e90ff;
+    }
+
+    nav a:hover, nav a:focus {
+        color: #82b1ff;
+        background: #0a0f1c;
+        box-shadow: 0 0 18px #00eaff, 0 0 36px #1e90ff;
+        text-shadow: 0 0 8px #00eaff, 0 0 16px #1e90ff;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      nav a:active {
+        color: #82b1ff;
+        background: #0a0f1c;
+        box-shadow: 0 0 18px #00eaff, 0 0 36px #1e90ff;
+        text-shadow: 0 0 8px #00eaff, 0 0 16px #1e90ff;
+      }
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    header#home {
+  margin-top: 140px !important;
+}
+
+    h1 {
+        font-size: 3rem;
+        color: #4fc3f7;
+    }
+
+    h1 span {
+        color: #82b1ff;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: #b3e5fc;
+        max-width: 700px;
+        margin: 20px auto;
+    }
+
+    section {
+        padding: 60px 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .btn, .btn#achievements-btn, #achievements-btn.btn {
+  min-width: 220px;
+  padding: 14px 0;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #00eaff 0%, #2196f3 50%, #1e90ff 100%);
+  color: #fff;
+  box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff, 0 0 0 12px #0a0f1c;
+  text-shadow: 0 0 12px #00eaff, 0 0 24px #1e90ff;
+  border: none;
+  border-radius: 30px;
+  position: relative;
+  z-index: 1;
+  transition: box-shadow 0.3s, background 0.3s, min-width 0.3s;
+  display: inline-block;
+}
+.btn:hover, .btn#achievements-btn:hover, #achievements-btn.btn:hover {
+  box-shadow: 0 0 64px #00eaff, 0 0 128px #1e90ff, 0 0 0 18px #0a0f1c;
+  background: linear-gradient(90deg, #1e90ff 0%, #00eaff 50%, #2196f3 100%);
+}
+    .btn {
+    margin-left: 0;
+    .btn + .btn {
+        margin-left: 18px;
+    }
+        display: inline-block;
+        padding: 12px 30px;
+        background: #2196f3;
+        color: white;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s, box-shadow 0.3s, text-shadow 0.3s;
+        box-shadow: 0 0 16px #00eaff, 0 0 32px #1e90ff;
+        text-shadow: 0 0 8px #00eaff, 0 0 16px #1e90ff;
+    }
+
+    .btn:hover {
+        background: #0d47a1;
+        box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff;
+        text-shadow: 0 0 16px #00eaff, 0 0 32px #1e90ff;
+    }
+
+  .skills-scroll-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0;
+  }
+  .skills {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 24px 0 24px 0;
+    min-width: 0;
+    width: 100%;
+    min-height: 160px;
+    align-items: center;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+  }
+
+    #scroll-left,
+    #scroll-right {
+        background: none;
+        border: none;
+        color: #00eaff;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0 8px;
+        min-width: 40px;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .skills {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 24px 0 24px 0;
+        min-width: 0;
+        width: 100%;
+        min-height: 160px;
+        align-items: center;
+        scroll-behavior: smooth;
+    }
+    .skills::-webkit-scrollbar {
+        height: 32px;
+        width: 320px;
+        background: transparent;
+    }
+    .skills::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 16px;
+        border: none;
+        box-shadow: none;
+    }
+    .skills::-webkit-scrollbar-track {
+        background: transparent;
+        width: 320px;
+    }
+    .skills {
+        scrollbar-width: none; /* For Firefox: hide scrollbar */
+    }
+    .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.07);
+        padding: 44px 22px;
+        border-radius: 32px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 220px;
+        max-width: 300px;
+        font-size: 1.45rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 0 48px #00eaff77;
+    }
+
+    .card .skill-img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 22px;
+  border-radius: 50%;
+  border: 6px solid #00eaff;
+  box-shadow: 0 0 24px #00eaff, 0 0 48px #1e90ff;
+  background: #0a0f1c;
+  object-fit: cover;
+  display: block;
+    }
+
+    .card:hover {
+        transform: translateY(-5px) scale(1.04);
+        box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff, 0 0 0 8px #0a0f1c;
+    }
+
+    .card:hover .skill-img {
+        box-shadow: 0 0 40px #00eaff, 0 0 80px #1e90ff, 0 0 0 10px #0a0f1c;
+        border-color: #00eaff;
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .card:active {
+        transform: translateY(-5px) scale(1.04);
+        box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff, 0 0 0 8px #0a0f1c;
+      }
+      .card:active .skill-img {
+        box-shadow: 0 0 40px #00eaff, 0 0 80px #1e90ff, 0 0 0 10px #0a0f1c;
+        border-color: #00eaff;
+      }
+    }
+
+    .card-active {
+        transform: translateY(-5px) scale(1.04);
+        box-shadow: 0 0 48px #00eaff, 0 0 96px #1e90ff, 0 0 0 12px #0a0f1c;
+        z-index: 2;
+    }
+    .card-active .skill-img {
+        width: 200px;
+        height: 200px;
+        box-shadow: 0 0 80px #00eaff, 0 0 160px #1e90ff, 0 0 0 24px #0a0f1c;
+        border-color: #00eaff;
+        transition: width 0.3s, height 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    @media (max-width: 700px) {
+      .skills-scroll-wrapper {
+        max-width: 100vw;
+      }
+      .skills {
+        gap: 16px;
+        padding: 16px 0 16px 0;
+      }
+      .card {
+        min-width: 120px;
+        max-width: 160px;
+        font-size: 0.95rem;
+      }
+      #scroll-left, #scroll-right {
+        font-size: 1.5rem;
+        min-width: 32px;
+        min-height: 32px;
+      }
+      .card-active .skill-img {
+        width: 140px;
+        height: 140px;
+      }
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+        background: rgba(0,0,0,0.7);
+    }
+
+    /* Modal styles */
+    #achievements-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(10, 15, 28, 0.95);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #achievements-modal h2 {
+        color: #4fc3f7;
+        margin-bottom: 24px;
+    }
+
+    #achievements-modal img {
+        max-width: 320px;
+        max-height: 220px;
+        border-radius: 12px;
+        box-shadow: 0 0 24px #00eaff55;
+        background: #fff;
+    }
+
+    #close-achievements {
+        position: absolute;
+        top: 32px;
+        right: 48px;
+        font-size: 2rem;
+        background: none;
+        border: none;
+        color: #00eaff;
+        cursor: pointer;
+    }
+
+    #achievements-modal .cert-nav-btn {
+  background: linear-gradient(90deg, #00eaff 0%, #2196f3 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 2.2rem;
+  box-shadow: 0 0 18px #00eaff, 0 0 36px #1e90ff;
+  cursor: pointer;
+  margin: 0 32px;
+  transition: background 0.3s, box-shadow 0.3s;
+  z-index: 10;
+}
+#achievements-modal .cert-nav-btn:hover {
+  background: #1e90ff;
+  box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff;
+}
+#achievements-modal .cert-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 80vh;
+  max-width: 100vw;
+  max-height: 80vh;
+  overflow: hidden;
+}
+#achievements-modal .cert-img {
+  max-width: 90vw;
+  max-height: 76vh;
+  border-radius: 18px;
+  box-shadow: 0 0 48px #00eaff99;
+  background: #fff;
+  margin: 0 auto;
+  display: block;
+}
+.btn#achievements-btn, #achievements-btn.btn {
+  background: linear-gradient(90deg, #00eaff 0%, #2196f3 50%, #1e90ff 100%);
+  color: #fff;
+  box-shadow: 0 0 32px #00eaff, 0 0 64px #1e90ff, 0 0 0 12px #0a0f1c;
+  text-shadow: 0 0 12px #00eaff, 0 0 24px #1e90ff;
+  border: none;
+  position: relative;
+  z-index: 1;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.btn#achievements-btn:hover, #achievements-btn.btn:hover {
+  box-shadow: 0 0 64px #00eaff, 0 0 128px #1e90ff, 0 0 0 18px #0a0f1c;
+  background: linear-gradient(90deg, #1e90ff 0%, #00eaff 50%, #2196f3 100%);
+}
+</style>
+</head>
+<body>
+<script>
+// Profile photo glow effect only (no toggle)
+document.addEventListener('DOMContentLoaded', function() {
+  var profilePic = document.querySelector('.profile-pic-glow');
+  if (profilePic) {
+    // Optionally, you can keep the glow on click/touch if you want:
+    profilePic.addEventListener('click', function() {
+      this.classList.toggle('profile-pic-active');
+    });
+    profilePic.addEventListener('touchend', function(e) {
+      this.classList.toggle('profile-pic-active');
+      e.preventDefault();
+    });
+  }
+  // Skills scroll buttons
+  var skillsScroll = document.getElementById('skills-scroll');
+  var scrollLeftBtn = document.getElementById('scroll-left');
+  var scrollRightBtn = document.getElementById('scroll-right');
+  if (skillsScroll && scrollLeftBtn && scrollRightBtn) {
+    scrollLeftBtn.addEventListener('click', function() {
+      skillsScroll.scrollBy({ left: -220, behavior: 'smooth' });
+    });
+    scrollRightBtn.addEventListener('click', function() {
+      skillsScroll.scrollBy({ left: 220, behavior: 'smooth' });
+    });
+  }
+  // Skill card click: grow card and logo with glow
+  var skillCards = document.querySelectorAll('.skills .card');
+  skillCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      skillCards.forEach(function(c) { c.classList.remove('card-active'); });
+      this.classList.add('card-active');
+    });
+    card.addEventListener('touchend', function(e) {
+      skillCards.forEach(function(c) { c.classList.remove('card-active'); });
+      this.classList.add('card-active');
+      e.preventDefault();
+    });
+  });
+  // Nav button click animation
+  var navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach(function(link) {
+    function animateNavBtn() {
+      link.classList.remove('nav-btn-animate');
+      void link.offsetWidth; // force reflow
+      link.classList.add('nav-btn-animate');
+      setTimeout(function() {
+        link.classList.remove('nav-btn-animate');
+      }, 220);
+    }
+    link.addEventListener('click', animateNavBtn);
+    link.addEventListener('touchend', function(e) {
+      animateNavBtn();
+    });
+  });
+
+  // Achievements modal logic
+  var achievementsBtn = document.getElementById('achievements-btn');
+  var achievementsModal = document.getElementById('achievements-modal');
+  var closeAchievements = document.getElementById('close-achievements');
+  if (achievementsBtn && achievementsModal && closeAchievements) {
+    achievementsBtn.addEventListener('click', function() {
+      achievementsModal.style.display = 'flex';
+    });
+    closeAchievements.addEventListener('click', function() {
+      achievementsModal.style.display = 'none';
+    });
+    achievementsModal.addEventListener('click', function(e) {
+      if (e.target === achievementsModal) {
+        achievementsModal.style.display = 'none';
+      }
+    });
+  }
+});
+</script>
+</head>
+
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<header id="home" style="margin-top:90px;">
+    <div>
+        <img src="prfile2.jpg" alt="profile-pic" class="skill-img profile-pic-glow">
+        <h1>Hi, I'm <span>Maharaja</span></h1>
+        <p>CSE student, developer, and innovator passionate about full stack software development..</p>
+        <a href="#projects" class="btn">View My Work</a>
+        <br>
+        <a href="resume.pdf" class="btn" target="_blank" style="margin-top:18px;display:inline-block;">Resume</a>
+    </div>
+</header>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>
+         Hi, I'm Maharaja — a 4th-year CSE student at Holy Cross Engineering College, aiming to become a Data Engineer.
+         I love building web apps.My passion lies in creating technology that makes life easier and more exciting.
+         Currently, I'm working on an LMS (Learning Management System) project and have hands-on experience in innovative projects.
+    </p>
+</section>
+    
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-scroll-wrapper" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+      <button id="scroll-left" aria-label="Scroll left" style="background: none; border: none; color: #00eaff; font-size: 2rem; cursor: pointer; padding: 0 8px; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center;">&#8592;</button>
+      <div class="skills" id="skills-scroll" style="flex: 1 1 auto; min-width: 0;">
+    <div class="card">
+      <img src="python.png" alt="Python" class="skill-img">
+      <div>Python</div>
+    </div>
+    <div class="card">
+      <img src="icons8-html-5-64.png" alt="HTML" class="skill-img">
+      <div>HTML</div>
+    </div>
+    <div class="card">
+      <img src="css-3.png" alt="CSS" class="skill-img">
+      <div>CSS</div>
+    </div>
+        <div class="card">
+            <img src="java-script.png" alt="JavaScript" class="skill-img">
+            <div>JavaScript</div>
+        </div>
+        <div class="card">
+            <img src="icons8-tailwind-css-64.png" alt="Tailwind" class="skill-img">
+            <div>Tailwind CSS</div>
+        </div>
+        <div class="card">
+            <img src="material.png" alt="Arduino / Embedded C" class="skill-img">
+            <div>Material UI</div>
+        </div>
+        <div class="card">
+            <img src="lms.png" alt="LMS" class="skill-img">
+            <div>LMS</div>
+        </div>
+        <div class="card">
+            <img src="ppt.png" alt="PPT Design" class="skill-img">
+            <div>PPT Design</div>
+        </div>
+        <div class="card">
+            <img src="database.png" alt="Material UI" class="skill-img">
+            <div>Sql</div>
+        </div>
+      </div>
+      <button id="scroll-right" aria-label="Scroll right" style="background: none; border: none; color: #00eaff; font-size: 2rem; cursor: pointer; padding: 0 8px; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center;">&#8594;</button>
+    </div>
+</section>
+
+<section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+        <div class="card">
+            <h3>News Summarizer App</h3>
+            <p>AI-powered app to scrape live news content and summarize it instantly.</p>
+        </div>
+        <div class="card">
+            <h3>Learner Meetup</h3>
+            <p>A MERN stack platform for college event sharing and posters.</p>
+        </div>
+        <div class="card">
+            <h3>LMS</h3>
+            <p>Currently, I’m working on open-source Learning Management Systems such as OpenEduCat and Moodle.</p>
+        </div>
+    </div>
+</section>
+
+<div style="display: flex; justify-content: center; align-items: center; margin: 32px 0;">
+  <button id="achievements-btn" class="btn" style="font-size:1.2rem; padding: 14px 38px; box-shadow: 0 0 24px #00eaff, 0 0 48px #1e90ff;">Achievements</button>
+</div>
+
+<!-- Achievements Modal -->
+<div id="achievements-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(10,15,28,0.95); z-index:2000; justify-content:center; align-items:center; flex-direction:column;">
+  <button id="close-achievements" style="position:absolute; top:32px; right:48px; font-size:2rem; background:none; border:none; color:#00eaff; cursor:pointer;">&times;</button>
+  <h2 style="color:#4fc3f7; margin-bottom:24px;">My Achievements</h2>
+  <div class="cert-frame">
+    <button class="cert-nav-btn" id="cert-prev" aria-label="Previous Certificate">&#8592;</button>
+    <img id="cert-img" class="cert-img" src="WhatsApp Image 2025-08-05 at 11.28.13_f4c30d1c.jpg" alt="Certificate" />
+    <button class="cert-nav-btn" id="cert-next" aria-label="Next Certificate">&#8594;</button>
+  </div>
+</div>
+<script>
+const certImages = [
+  "WhatsApp Image 2025-08-05 at 11.28.13_f4c30d1c.jpg",
+  "WhatsApp Image 2025-08-10 at 17.52.40_d0b84f1a.jpg",
+  "WhatsApp Image 2025-08-10 at 17.52.40_29c56cec.jpg",
+  "WhatsApp Image 2025-08-10 at 17.52.40_33d35603.jpg",
+  "WhatsApp Image 2025-08-10 at 17.52.41_f948b66a.jpg"
+];
+let certIndex = 0;
+const certImg = document.getElementById('cert-img');
+const certPrev = document.getElementById('cert-prev');
+const certNext = document.getElementById('cert-next');
+function showCert(idx) {
+  certImg.src = certImages[idx];
+}
+certPrev.addEventListener('click', function() {
+  certIndex = (certIndex - 1 + certImages.length) % certImages.length;
+  showCert(certIndex);
+});
+certNext.addEventListener('click', function() {
+  certIndex = (certIndex + 1) % certImages.length;
+  showCert(certIndex);
+});
+// Optional: Keyboard navigation
+window.addEventListener('keydown', function(e) {
+  if (document.getElementById('achievements-modal').style.display === 'flex') {
+    if (e.key === 'ArrowLeft') certPrev.click();
+    if (e.key === 'ArrowRight') certNext.click();
+  }
+});
+</script>
+<section id="contact">
+    <h2>Contact Me</h2>
+    <style>
+      .contact-icon {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 8px;
+        margin-bottom: 3px;
+        filter: drop-shadow(0 0 2px #00eaff);
+      }
+    </style>
+    <p>
+      <a href="mailto:maharaja@example.com" style="text-decoration:none; color:inherit;">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="#4fc3f7" width="20" height="20"><path d="M12 13.065c-2.7 0-8-1.355-8-4.065V7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v1.5c0 2.71-5.3 4.065-8 4.065zm-7-4.065c0 1.31 4.03 3.065 7 3.065s7-1.755 7-3.065V7.5A1.5 1.5 0 0 0 17.5 6h-11A1.5 1.5 0 0 0 5 7.5v1.5z"/><path d="M4 9.5v5A2.5 2.5 0 0 0 6.5 17h11A2.5 2.5 0 0 0 20 14.5v-5c0 .47-.19.93-.54 1.36C18.13 11.7 15.13 13.065 12 13.065s-6.13-1.365-7.46-2.205A2.01 2.01 0 0 1 4 9.5z"/></svg>
+        maharaja@example.com
+      </a>
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/in/maha-raja-b00929300?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="text-decoration:none; color:inherit;">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm15.5 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.37-1.54 2.82-1.54 3.01 0 3.57 1.98 3.57 4.56v5.62z"/></svg>
+        linkedin.com
+      </a>
+    </p>
+    <p>
+      <a href="https://github.com/maharaja" target="_blank" style="text-decoration:none; color:inherit;">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.166 6.84 9.49.5.09.68-.217.68-.483 0-.237-.008-.868-.013-1.703-2.782.604-3.37-1.342-3.37-1.342-.454-1.153-1.11-1.46-1.11-1.46-.908-.62.07-.608.07-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.09-.647.35-1.088.636-1.34-2.22-.253-4.555-1.11-4.555-4.943 0-1.09.39-1.98 1.03-2.68-.104-.253-.447-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.71.115 2.51.337 1.91-1.295 2.75-1.025 2.75-1.025.546 1.378.203 2.397.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.842-2.34 4.687-4.57 4.936.36.31.68.92.68 1.855 0 1.338-.012 2.42-.012 2.75 0 .27.18.577.69.48C19.13 20.162 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+        github.com/maharaja
+      </a>
+    </p>
+    <p>
+      <a href="https://www.instagram.com/__family_lover__26?utm_source=qr&igsh=dzRrMXhmeG5zc3Yx" target="_blank" style="text-decoration:none; color:inherit;">
+        <svg class="contact-icon" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.5 1.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0z"/></svg>
+        instagram.com
+      </a>
+    </p>
+</section>
+
+<footer>
+    &copy; 2025 Maharaja. All rights reserved.
+</footer>
+
+</body>
+</html>
